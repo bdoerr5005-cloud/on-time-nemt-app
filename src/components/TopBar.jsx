@@ -12,7 +12,12 @@ export default function TopBar() {
   return (
     <div className="header">
       <div className="pill">
-        <span style={{fontWeight: 900}}>🕒</span>
+        <img
+  src="/logo-header.jpeg"
+  alt="On Time NEMT"
+  style={{ width: 34, height: 34, borderRadius: 8, objectFit: "contain" }}
+/>
+
         <div>
           <div style={{fontWeight:800, lineHeight:1.1}}>On Time NEMT</div>
           <div className="small" style={{lineHeight:1.1}}></div>
