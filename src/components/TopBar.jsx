@@ -1,0 +1,43 @@
+import React from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { signOut } from '../lib/localAuth'
+import { useAuth } from '../hooks/useAuth'
+import { useAdmin } from '../hooks/useAdmin'
+
+export default function TopBar() {
+  const loc = useLocation()
+  const { user } = useAuth()
+  const { admin } = useAdmin()
+
+  return (
+    <div className="header">
+      <div className="pill">
+        <span style={{fontWeight: 900}}>🕒</span>
+        <div>
+          <div style={{fontWeight:800, lineHeight:1.1}}>On Time NEMT</div>
+          <div className="small" style={{lineHeight:1.1}}>{admin ? 'Admin' : 'Driver'} Console</div>
+        </div>
+      </div>
+
+      <div className="nav">
+        {user && (
+          <>
+            <Link className="pill" to="/">Home</Link>
+            <Link className="pill" to="/pretrip">Pre-Trip</Link>
+            <Link className="pill" to="/cleaning">Cleaning</Link>
+            <Link className="pill" to="/incident">Incident</Link>
+            <Link className="pill" to="/maintenance">Maintenance</Link>
+            <Link className="pill" to="/resources">Resources</Link>
+            {admin && <Link className="pill" to="/admin">Dashboard</Link>}
+          </>
+        )}
+        {!user && <span className="badge">Not signed in</span>}
+        {user && (
+          <button className="btn" onClick={() => signOut(null)} title="Sign out">
+            Sign out
+          </button>
+        )}
+      </div>
+    </div>
+  )
+}
